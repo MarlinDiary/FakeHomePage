@@ -1,0 +1,59 @@
+- title: General Information
+  type: map
+  contents:
+    - name: Full Name
+      value: Elliott Wen
+    
+
+- title: Education
+  type: time_table
+  contents:
+    - title: PhD
+      institution: University of Auckland, New Zealand
+      year: 2017-2021
+      
+    - title: MPhil
+      institution: The Hong Kong Polytechnic University, Hong Kong
+      year: 2013-2015
+
+- title: Experience
+  type: time_table
+  contents:
+    - title: Lecturer
+      institution: The University of Auckland
+      year: Since 2022
+      
+    - title: Research Fellow
+      institution: Auckland Bioenginerring Institute
+      year: 2020 - 2022
+
+    - title: Research Assistant
+      institution: Victoria University of Wellington
+      year: 2020 - 2022
+
+- title: Funding
+  type: time_table
+  contents:
+    - title: Transdisciplinary Ideation Fund (60K NZD)
+      institution: The University of Auckland
+      year: 2023
+
+    - title: Meta Motion Sickness Research (20K NZD) 
+      institution: Meta (Facebook)
+      year: 2023
+      
+
+- title: Hobby Projects
+  type: time_table
+  contents:
+    - title: <a href="https://uoa-os.app">UoA Operating System Playground</a>
+      year: 2023
+      description: A web-based playground designed to empower students to explore the intricacies of the Linux Kernel directly in their browser.
+
+    - title: <a href="https://uoa-compsci-gta.info">UoA GTA Management System</a>
+      year: 2023
+      description: A web-based management system designed for recruiting Graduate Teaching Assistants at the University of Auckland.
+
+    - title: <a href="https://www.swiftlatex.com/">SwiftLaTeX</a>
+      year: 2020
+      description: PdfTeX and XeTeX written in 100% WebAssembly and run in browsers. Support WYSIWYG editing on LaTeX documents using XeTeX engine.

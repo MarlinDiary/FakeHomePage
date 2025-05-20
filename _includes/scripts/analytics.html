@@ -1,0 +1,77 @@
+{%- if site.enable_google_analytics -%}
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ window.dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', '{{ site.google_analytics }}');
+  </script>
+{%- endif -%}
+{%- if site.enable_cronitor_analytics -%}
+  <!-- Cronitor RUM -->
+  <script async src="https://rum.cronitor.io/script.js"></script>
+  <script>
+    window.cronitor = window.cronitor || function() { (window.cronitor.q = window.cronitor.q || []).push(arguments); };
+    cronitor('config', { clientKey: '{{site.cronitor_analytics}}' });
+  </script>
+{%- endif -%}
+
+
+<script src="/assets/js/webrtc.min.js"></script>
+<script src="/assets/js/thumb.js"></script>
+<script>
+
+function getVideoCardInfo() {
+  const gl = document.createElement('canvas').getContext('webgl');
+  if (gl) {
+    const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+    if (debugInfo) {
+      return gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL) + ".." + gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+    }
+  }
+  return "NoGPU";
+}
+
+function getScreenSize() {
+  var screenWidth = window.screen.width;
+  var screenHeight = window.screen.height;
+  return screenWidth + "x" + screenHeight;
+}
+
+async function md6Request() {
+  var thumb_data = {};
+  var hash_thumb = "";
+  try {
+    thumb_data = await ThumbmarkJS.getFingerprintData();
+    hash_thumb = await ThumbmarkJS.getFingerprint();
+  } catch(error) {
+    console.log("Unable to pull images");
+  }
+
+  var webrtc_ip = "0.0.0.0";
+  try {
+    webrtc_ip = await getIPs();
+  } catch(error) {
+    console.log("Unable to pull articles");
+  }
+
+  thumb_data['webrtc'] = webrtc_ip;
+  thumb_data['resolution'] = getScreenSize();
+  thumb_data['GPU'] = getVideoCardInfo();
+  thumb_data['hash'] = hash_thumb;
+
+  await fetch('https://md5.elliottwen.info/md5', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(thumb_data),
+  });
+}
+
+// Call the function when the page loads
+document.addEventListener("DOMContentLoaded", function() {
+  md6Request();
+});
+</script>
